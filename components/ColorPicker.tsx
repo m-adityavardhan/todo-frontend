@@ -11,6 +11,7 @@ const colors = [
   { name: 'yellow', value: 'yellow' },
   { name: 'green', value: 'green' },
   { name: 'blue', value: 'blue' },
+  { name: 'indigo', value: 'indigo' },
   { name: 'purple', value: 'purple' },
   { name: 'pink', value: 'pink' },
   { name: 'brown', value: 'brown' },
@@ -22,6 +23,7 @@ const colorClasses = {
   yellow: 'bg-task-yellow',
   green: 'bg-task-green',
   blue: 'bg-task-blue',
+  indigo: 'bg-task-indigo',
   purple: 'bg-task-purple',
   pink: 'bg-task-pink',
   brown: 'bg-task-brown',
@@ -30,7 +32,7 @@ const colorClasses = {
 export default function ColorPicker({ selectedColor, onColorChange }: ColorPickerProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-300">
+      <label className="block text-sm font-medium text-[color:var(--figma-blue)]">
         Color
       </label>
       <div className="flex gap-2">

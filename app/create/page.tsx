@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Plus } from 'lucide-react'
-import { apiClient } from '@/lib/api'
-import ColorPicker from '@/components/ColorPicker'
+import { apiClient } from '../../lib/api'
+import ColorPicker from '../../components/ColorPicker'
 
 export default function CreateTaskPage() {
   const router = useRouter()
@@ -42,24 +42,40 @@ export default function CreateTaskPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-[--figma-bg]">
+      {/* Black Banner */}
+      <div className="bg-[--figma-banner] w-full h-32 sm:h-36 md:h-40 lg:h-44 xl:h-48 2xl:h-52 flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          {/* Logo */}
+          <div className="w-8 h-8 flex items-center justify-center">
+            <img 
+              src="/assets/rocket.svg" 
+              alt="Rocket Logo" 
+              className="w-8 h-8"
+            />
+          </div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Todo App
+          </h1>
+        </div>
+      </div>
+
       <div className="max-w-md mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
           <button
             onClick={handleBack}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+            className="hover:bg-gray-700 rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-gray-400" />
+            <ArrowLeft className="w-5 h-5 text-gray-300" />
           </button>
-          <h1 className="text-xl font-semibold text-gray-100">Added Task</h1>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Title Input */}
           <div className="space-y-2">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="title" className="block text-sm font-medium text-[color:var(--figma-blue)]">
               Title
             </label>
             <input
@@ -68,7 +84,7 @@ export default function CreateTaskPage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Ex. Brush you teeth,"
-              className="input-field"
+              className="input-field text-[color:var(--figma-gray-100)]"
               disabled={loading}
             />
           </div>
@@ -90,14 +106,20 @@ export default function CreateTaskPage() {
           <button
             type="submit"
             disabled={loading || !title.trim()}
-            className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#1E6F9F] hover:bg-[#1E6F9F]/90 text-[#F2F2F2] font-medium 
+                     py-3 px-6 rounded-lg transition-all duration-200 
+                     flex items-center justify-center gap-3 shadow-lg text-[--figma-text-size] w-full h-10 max-w-2xl
+                     disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? (
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-            ) : (
-              <Plus className="w-5 h-5" />
-            )}
-            Add Task
+              Add Task
+            {<div className="w-5 h-5 flex items-center justify-center">
+                <img 
+                  src="/assets/plus.svg" 
+                  alt="Plus Icon" 
+                  className="w-5 h-5"
+                />
+              </div>
+            }
           </button>
         </form>
       </div>

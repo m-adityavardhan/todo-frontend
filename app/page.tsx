@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Rocket, Plus } from 'lucide-react'
-import { apiClient } from '@/lib/api'
-import TaskCard from '@/components/TaskCard'
-import EmptyState from '@/components/EmptyState'
-import { Task } from '@/lib/models'
+import { apiClient } from '../lib/api'
+import TaskCard from '../components/TaskCard'
+import EmptyState from '../components/EmptyState'
+import { Task } from '../lib/models'
 
 export default function HomePage() {
   const router = useRouter()
@@ -69,62 +68,120 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
+      <div className="min-h-screen bg-[--figma-bg] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-2 mb-8">
-          <Rocket className="w-6 h-6 text-primary-500" />
-          <h1 className="text-2xl font-bold text-gray-100">Todo App</h1>
+    <div className="min-h-screen bg-[--figma-bg]">
+      {/* Black Banner - Responsive height with relative positioning */}
+      <div className="relative bg-[--figma-banner] w-full h-32 sm:h-36 md:h-40 lg:h-44 xl:h-48 2xl:h-52 flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          {/* Logo */}
+          <div className="w-8 h-6 flex items-center justify-center">
+            <img 
+              src="/assets/rocket.svg" 
+              alt="Rocket Logo" 
+              className="w-8 h-8"
+            />
+          </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Todo App
+          </h1>
         </div>
 
-        {/* Create Task Button */}
+        {/* Floating Create Task Button - Half in banner, half outside */}
         <button
           onClick={handleCreateTask}
-          className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 mb-6"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2
+                     bg-[#1E6F9F] hover:bg-[#1E6F9F]/90 text-[#F2F2F2] font-medium 
+                     py-3 px-6 rounded-lg shadow-lg transition-all duration-200 
+                     flex items-center justify-center gap-3 text-[--figma-text-size] w-full h-14 max-w-2xl"
         >
-          <Plus className="w-5 h-5" />
           Create Task
+          <div className="w-5 h-5 flex items-center justify-center">
+            <img 
+              src="/assets/plus.svg" 
+              alt="Plus Icon" 
+              className="w-5 h-5"
+            />
+          </div>
         </button>
+      </div>
 
-        {/* Task Summary */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="text-primary-400 font-medium">
-            Tasks {totalCount}
-          </div>
-          <div className="text-purple-400 font-medium">
-            Completed {completedCount} of {totalCount}
-          </div>
-        </div>
+      {/* Main Content Container with top margin for floating button */}
+      <div className="bg-[--figma-bg] min-h-screen mt-12">
+        <div className="max-w-4xl mx-auto px-6 py-8 lg:px-8 xl:px-12">
+          {/* Task Summary */}
+          <div className="max-w-2xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <div className="flex items-center gap-3">
+                <span className="text-[color:var(--figma-blue)] font-medium text-[--figma-text-size]">Tasks</span>
+                <span className="bg-gray-700 text-white px-2 py-0.5 rounded-full text-[--figma-text-size-sm] font-medium">
+                  {totalCount}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-[color:var(--figma-purple)] font-medium text-[--figma-text-size]">Completed</span>
+                <span className="bg-gray-700 text-white px-2 py-0.5 rounded-full text-[--figma-text-size] font-medium">
+                  {completedCount > 0 && (
+                    <>
+                      {completedCount} of {totalCount}
+                    </>
+                  )}
+                  {completedCount == 0 && (
+                    <>
+                      {completedCount}
+                    </>
+                  )}
+                </span>
+              </div>
+            </div>
 
-        {/* Error Message */}
-        {error && (
-          <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
-            <p className="text-red-400 text-sm">{error}</p>
-          </div>
-        )}
+            {/* Divider line - only show when no tasks */}
+            {tasks.length === 0 && (
+              <div className="w-full h-px bg-[--figma-horizontal-break] mb-2"></div>
+            )}
 
-        {/* Task List */}
-        <div className="space-y-3">
-          {tasks.length === 0 ? (
-            <EmptyState />
-          ) : (
-            tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                task={task}
-                onToggle={handleToggleTask}
-                onDelete={handleDeleteTask}
-                onClick={handleTaskClick}
-              />
-            ))
-          )}
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
+                <p className="text-red-400 text-sm">{error}</p>
+              </div>
+            )}
+
+            {/* Task List */}
+            <div className="space-y-4">
+              {tasks.length === 0 ? (
+                <EmptyState />
+              ) : (
+                <>
+                  {/* Incomplete Tasks */}
+                  {tasks.filter(task => !task.completed).map((task) => (
+                    <TaskCard
+                      key={task.id}
+                      task={task}
+                      onToggle={handleToggleTask}
+                      onDelete={handleDeleteTask}
+                      onClick={handleTaskClick}
+                    />
+                  ))}
+                  {/* Completed Tasks */}
+                  {tasks.filter(task => task.completed).map((task) => (
+                    <TaskCard
+                      key={task.id}
+                      task={task}
+                      onToggle={handleToggleTask}
+                      onDelete={handleDeleteTask}
+                      onClick={handleTaskClick}
+                    />
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

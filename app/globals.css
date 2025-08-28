@@ -2,27 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --figma-bg: #1A1A1A;
+  --figma-banner: #0D0D0D;
+  --figma-text: #808080;
+  --figma-purple: #8284FA;
+  --figma-blue: #4EA8DE;
+  --figma-gray-100: #F2F2F2;
+  --figma-gray-300: #333333;
+  --figma-gray-400: #808080;
+  --figma-gray-500: #262626;
+  --figma-text-size: 14px;
+  --figma-text-size: 12px;
+}
+
 @layer base {
+  html, body {
+    @apply text-gray-100;
+    background-color: var(--figma-bg);
+  }
+  
   body {
-    @apply bg-gray-900 text-gray-100;
+    background-color: var(--figma-bg);
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-800;
   }
   
   .btn-secondary {
-    @apply bg-gray-700 hover:bg-gray-600 text-gray-100 font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+    @apply bg-gray-700 hover:bg-gray-600 text-gray-100 font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800;
   }
   
   .input-field {
     @apply w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
-  }
-  
-  .task-card {
-    @apply bg-gray-800 border border-gray-700 rounded-lg p-4 hover:border-gray-600 transition-colors duration-200;
   }
   
   .color-option {

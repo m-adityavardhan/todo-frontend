@@ -21,14 +21,15 @@ module.exports = {
           900: '#1e3a8a',
         },
         task: {
-          red: '#ef4444',
-          orange: '#f97316',
-          yellow: '#eab308',
-          green: '#22c55e',
-          blue: '#3b82f6',
-          purple: '#a855f7',
-          pink: '#ec4899',
-          brown: '#a16207',
+          red: '#FF3B30',
+          orange: '#FF9500',
+          yellow: '#FFCC00',
+          green: '#34C759',
+          blue: '#007AFF',
+          indigo: '#5856D6',
+          purple: '#AF52DE',
+          pink: '#FF2D55',
+          brown: '#A2845E',
         }
       },
       animation: {
