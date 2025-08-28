@@ -142,7 +142,7 @@ export default function HomePage() {
 
             {/* Divider line - only show when no tasks */}
             {tasks.length === 0 && (
-              <div className="w-full h-px bg-[--figma-horizontal-break] mb-2"></div>
+              <div className="w-full h-px bg-[--figma-gray-300] mb-2"></div>
             )}
 
             {/* Error Message */}
