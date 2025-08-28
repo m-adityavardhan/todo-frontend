@@ -1,5 +1,3 @@
-import { ClipboardList } from 'lucide-react'
-
 export default function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
