@@ -218,6 +218,32 @@ The frontend communicates with the backend through the `apiClient` in `lib/api.t
    - Verify Tailwind CSS is properly configured
    - Check custom CSS variables in `globals.css`
 
+## 🚀 Running Tests
+
+### Basic Commands
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode (development)
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests in CI mode (no watch, with coverage)
+npm run test:ci
+```
+
+### Test Scripts
+
+- `test` - Run all tests once
+- `test:watch` - Run tests in watch mode for development
+- `test:coverage` - Generate coverage report
+- `test:ci` - Run tests for continuous integration
+
+
 ## 📱 Responsive Design
 
 The app is designed to work on all devices:
@@ -240,6 +266,13 @@ The app is designed to work on all devices:
 1. Modify CSS variables in `globals.css`
 2. Update Tailwind configuration
 3. Ensure consistency across all components
+
+## Coming Soon 
+- Add Keyboard Shortcuts - Ctrl+N for new task, Enter to save, Esc to cancel
+- Split into Task and completed tasks
+- Collapse completed tasks under normal tasks
+- Drag & Drop reordering within the respected groups
+- Add internationalization 
 
 ## 📚 Additional Resources
 
